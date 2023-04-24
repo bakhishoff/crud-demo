@@ -1,6 +1,5 @@
 package crud.demo;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -11,14 +10,13 @@ public class Main {
     private static Person[] persons;
     private static int say = 0;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Massivin ölçüsü: ");
         int n = sc.nextInt();
         persons = new Person[n];
 
         while (true) {
-            Runtime.getRuntime().exec("cls");
             System.out.println("Menu" +
                                "\n\t1 - Create" +
                                "\n\t2 - Read All" +
@@ -100,7 +98,7 @@ public class Main {
         }
     }
 
-    public static Person createPerson(Scanner sc) {
+    public static void createPerson(Scanner sc) {
         System.out.print("id = ");
         long id = sc.nextLong();
 
@@ -116,7 +114,6 @@ public class Main {
         Person p1 = new Person(id, name, surname, age);
         ensureCapacity();
         persons[say++] = p1;
-        return p1;
     }
 
     private static void ensureCapacity() {
