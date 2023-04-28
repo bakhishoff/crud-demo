@@ -1,6 +1,6 @@
 package crud.demo;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author ${USER}
@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Main {
 
     private static Person[] persons;
+    private static List<Person> personList = new ArrayList<>();
+    private static List<Person> personList1 = new LinkedList<>();
     private static int say = 0;
 
     public static void main(String[] args) {
@@ -114,6 +116,9 @@ public class Main {
         Person p1 = new Person(id, name, surname, age);
         ensureCapacity();
         persons[say++] = p1;
+
+        personList.add(p1);
+        personList1.add(p1);
     }
 
     private static void ensureCapacity() {
@@ -129,6 +134,17 @@ public class Main {
         for (int i = 0; i < say; i++) {
             System.out.println(persons[i]);
         }
+
+        personList.sort((p1, p2) -> p1.getName().compareTo(p2.getName()));
+        for (Person person : personList) {
+            System.out.println(person);
+        }
+
+        for (int i = 0; i < personList1.size(); i++) {
+            System.out.println(personList1.get(i));
+        }
+
+
 //        int i = 0;
 //        Person p;
 //        while ((p =persons[i++]) != null) {
@@ -143,6 +159,13 @@ public class Main {
             if (persons[i].getId() == id) {
                 // hemin personu qaytar
                 return persons[i];
+            }
+        }
+        for (Person person : personList) {
+            // eger personun id-si verilen id-e beraberdirse
+            if (person.getId() == id) {
+                // hemin personu qaytar
+                return person;
             }
         }
         return null;
@@ -181,6 +204,14 @@ public class Main {
                 return true;
             }
         }
+        for (Person person : personList) {
+            //eger personun id-si verilmis id-e beraberdirse
+            if (person.getId() == id) {
+                //true qaytar
+                return personList.remove(person);
+            }
+        }
+
         //eger hec ne tapilmadisa false qaytar
         return false;
     }
